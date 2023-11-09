@@ -243,6 +243,39 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
+ /books/borrowed:
+    get:
+      tags:
+        - "Book"
+      summary: Get borrowed books
+      description: Retrieve a list of books currently borrowed by visitors.
+      operationId: getBorrowedBooks
+      responses:
+        200:
+          description: List of borrowed books
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookResponse'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+
 components:
   parameters:
     pathPagination:
