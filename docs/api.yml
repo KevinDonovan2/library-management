@@ -562,6 +562,21 @@ components:
         returnDate:
           type: string
           format: date-time
+    ActivityResponse:
+      allOf:
+        - $ref: '#/components/schemas/Response'
+        - properties:
+            body:
+              type: object
+              properties:
+                borrowedBooks:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Book'
+                returnedBooks:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Book'
     Author:
       type: object
       properties:
