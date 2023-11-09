@@ -363,7 +363,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Response'
-
+ /books/available:
+    get:
+      tags:
+        - "books"
+      summary: Get available books
+      description: Retrieve a list of books currently available for borrowing.
+      operationId: getAvailableBooks
+      responses:
+        200:
+          description: List of available books
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookResponse'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
 components:
   parameters:
     pathPagination:
