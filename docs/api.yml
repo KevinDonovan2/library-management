@@ -407,6 +407,26 @@ components:
       enum:
         - M
         - F
+    Response:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+        body:
+          type: object
+    Status:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+    BookResponse:
+      allOf:
+        - $ref: '#/components/schemas/Response'
+        - properties:
+            body:
+              $ref: '#/components/schemas/Book'
   #TD2 create crupdateBook
     crupdateBook : 
       type: object
