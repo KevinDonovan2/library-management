@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
  title: Library API
- version: 1.0.6
+ version: 1.0.7
  description: STD22001
 servers:
  - url: https://library.com
@@ -178,77 +178,36 @@ paths:
         200:
           description: The authors for the specified books have been updated successfully
 components:
- schemas:
-    parameters:
-      pathPagination:
-        in: query
-        name: pathPagination
-        description: Object for path pagination
-        required: false
-        schema:
-          type: object
-          properties:
-            page:
-              type: integer
-              default: 1
-            pageSize:
-              type: integer
-              default: 50
-      queryPagination:
-        in: query
-        name: queryPagination
-        description: Object for query pagination
-        required: false
-        schema:
-          type: object
-          properties:
-            page:
-              type: integer
-              default: 1
-            pageSize:
-              type: integer
-              default: 50
-    #TD2 use heritage
-    Book:
-      allOf:
-        - $ref: '#/components/schemas/crupdateBook'
-        - properties:
-            Author:
-              $ref: '#/components/schemas/Author'
-      
-    Author:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-    Sex:
-      type: string
-      enum:
-        - M
-        - F
-  #TD2 create crupdateBook
-    crupdateBook : 
-      type: object
-      properties:
-        id:
-          type: string
-        bookName : 
-          type: string
-        pageNumbers:
-          type: integer
-        topic:
-          type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
-        releaseDate:
-          type: string
-          format: date
-    # add response 200,400, 403,500
-      responses:
+  parameters:
+    pathPagination:
+      in: query
+      name: pathPagination
+      description: Object for path pagination
+      required: false
+      schema:
+        type: object
+        properties:
+          page:
+            type: integer
+            default: 1
+          pageSize:
+            type: integer
+            default: 50
+    queryPagination:
+      in: query
+      name: queryPagination
+      description: Object for query pagination
+      required: false
+      schema:
+        type: object
+        properties:
+          page:
+            type: integer
+            default: 1
+          pageSize:
+            type: integer
+            default: 50
+  responses:
         baseResponse:
           description: Réponse de base pour toutes les réponses
           content:
@@ -352,3 +311,45 @@ components:
                       body:
                         type: object
                         description: Contenu de la réponse 500
+    #TD2 use heritage
+  schemas:
+    Book:
+      allOf:
+        - $ref: '#/components/schemas/crupdateBook'
+        - properties:
+            Author:
+              $ref: '#/components/schemas/Author'
+      
+    Author:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Sex:
+      type: string
+      enum:
+        - M
+        - F
+  #TD2 create crupdateBook
+    crupdateBook : 
+      type: object
+      properties:
+        id:
+          type: string
+        bookName : 
+          type: string
+        pageNumbers:
+          type: integer
+        topic:
+          type: string
+          enum:
+            - ROMANCE
+            - COMEDY
+            - OTHER
+        releaseDate:
+          type: string
+          format: date
+    # add response 200,400, 403,500
+      
