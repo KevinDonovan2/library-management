@@ -243,16 +243,28 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
- /books/borrowed:
-    get:
+ /books/{bookId}/borrow:
+    put:
       tags:
-        - "Book"
-      summary: Get borrowed books
-      description: Retrieve a list of books currently borrowed by visitors.
-      operationId: getBorrowedBooks
+        - "books"
+      summary: Borrow a book
+      description: Allow a visitor to borrow a book by specifying the book ID.
+      operationId: borrowBook
+      parameters:
+        - name: bookId
+          in: path
+          description: The ID of the book to borrow.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BorrowRequest'
       responses:
         200:
-          description: List of borrowed books
+          description: Book borrowed successfully
           content:
             application/json:
               schema:
@@ -275,7 +287,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Response'
-
 components:
   parameters:
     pathPagination:
@@ -427,7 +438,14 @@ components:
         - properties:
             Author:
               $ref: '#/components/schemas/Author'
-      
+    BorrowRequest:
+      type: object
+      properties:
+        visitorId:
+          type: string
+        borrowDate:
+          type: string
+          format: date-time
     Author:
       type: object
       properties:
