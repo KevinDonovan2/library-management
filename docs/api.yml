@@ -246,7 +246,7 @@ paths:
  /books/{bookId}/borrow:
     put:
       tags:
-        - "books"
+        - "Book"
       summary: Borrow a book
       description: Allow a visitor to borrow a book by specifying the book ID.
       operationId: borrowBook
@@ -265,6 +265,50 @@ paths:
       responses:
         200:
           description: Book borrowed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookResponse'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+ /books/{bookId}/return:
+    put:
+      tags:
+        - "books"
+      summary: Return a book
+      description: Allow a visitor to return a borrowed book by specifying the book ID.
+      operationId: returnBook
+      parameters:
+        - name: bookId
+          in: path
+          description: The ID of the book to return.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnRequest'
+      responses:
+        200:
+          description: Book returned successfully
           content:
             application/json:
               schema:
@@ -444,6 +488,14 @@ components:
         visitorId:
           type: string
         borrowDate:
+          type: string
+          format: date-time
+    ReturnRequest:
+      type: object
+      properties:
+        visitorId:
+          type: string
+        returnDate:
           type: string
           format: date-time
     Author:
