@@ -177,6 +177,53 @@ paths:
       responses:
         200:
           description: The authors for the specified books have been updated successfully
+ /authors/import:
+    post:
+      tags:
+        - Author
+      summary: Import authors from Excel or JSON
+      operationId: importAuthors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/ImportAuthor'
+          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+            description: Fichier Excel (XLSX) pour l'importation d'auteurs
+      responses:
+        200:
+          description: Liste des auteurs importés
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+
+ /books/import:
+    post:
+      tags:
+        - Book
+      summary: Import books from Excel or JSON
+      operationId: importBooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/ImportBook'
+          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+            description: Fichier Excel (XLSX) pour l'importation de livres
+      responses:
+        200:
+          description: Liste des livres importés
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
 components:
   parameters:
     pathPagination:
@@ -351,5 +398,34 @@ components:
         releaseDate:
           type: string
           format: date
-    # add response 200,400, 403,500
-      
+    ImportAuthor:
+      type: object
+      properties:
+        authorName:
+          type: string
+        sex:
+          type: string
+          enum:
+            - M
+            - F
+
+    ImportBook:
+      type: object
+      properties:
+        bookName:
+          type: string
+        author:
+          type: string
+        pageNumbers:
+          type: integer
+        topic:
+          type: string
+          enum:
+            - ROMANCE
+            - COMEDY
+            - OTHER
+        releaseDate:
+          type: string
+          format: date
+        idAuthor:
+          type: string
