@@ -191,6 +191,35 @@ paths:
           description: The authors for the specified books have been updated successfully
 components:
  schemas:
+    parameters:
+      pathPagination:
+        in: query
+        name: pathPagination
+        description: Object for path pagination
+        required: false
+        schema:
+          type: object
+          properties:
+            page:
+              type: integer
+              default: 1
+            pageSize:
+              type: integer
+              default: 50
+      queryPagination:
+        in: query
+        name: queryPagination
+        description: Object for query pagination
+        required: false
+        schema:
+          type: object
+          properties:
+            page:
+              type: integer
+              default: 1
+            pageSize:
+              type: integer
+              default: 50
     #TD2 use heritage
     Book:
       allOf:
@@ -206,11 +235,11 @@ components:
           type: string
         name:
           type: string
-        sex:
-          type: string
-          enum:
-            - M
-            - F
+    Sex:
+      type: string
+      enum:
+        - M
+        - F
   #TD2 create crupdateBook
     crupdateBook : 
       type: object
