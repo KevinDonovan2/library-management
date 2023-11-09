@@ -290,7 +290,7 @@ paths:
  /books/{bookId}/return:
     put:
       tags:
-        - "books"
+        - "Book"
       summary: Return a book
       description: Allow a visitor to return a borrowed book by specifying the book ID.
       operationId: returnBook
@@ -334,7 +334,7 @@ paths:
  /books/borrowed:
     get:
       tags:
-        - "books"
+        - "Book"
       summary: Get borrowed books
       description: Retrieve a list of books currently borrowed by visitors.
       operationId: getBorrowedBooks
@@ -366,7 +366,7 @@ paths:
  /books/available:
     get:
       tags:
-        - "books"
+        - "Book"
       summary: Get available books
       description: Retrieve a list of books currently available for borrowing.
       operationId: getAvailableBooks
@@ -377,6 +377,59 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookResponse'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+ /visitors/{visitorId}/activities:
+    get:
+      tags:
+        - "Visitor"
+      summary: Get visitor activities
+      description: Retrieve the borrowing and returning activities of a visitor within a specified period.
+      operationId: getVisitorActivities
+      parameters:
+        - name: visitorId
+          in: path
+          description: The ID of the visitor.
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: startDate
+          description: Start date for the activity period (ISO 8601 format).
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: endDate
+          description: End date for the activity period (ISO 8601 format).
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        200:
+          description: List of visitor activities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityResponse'
         400:
           description: Bad request
           content:
