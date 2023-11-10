@@ -365,6 +365,8 @@ paths:
                 $ref: '#/components/schemas/Response'
  /books/available:
     get:
+      security:
+        - public: []
       tags:
         - "Book"
       summary: Get available books
@@ -712,3 +714,8 @@ components:
           format: date
         idAuthor:
           type: string
+  securitySchemes:
+    public:
+      type: apiKey
+      name: Authorization
+      in: header
