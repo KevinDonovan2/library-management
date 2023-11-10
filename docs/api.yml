@@ -132,6 +132,21 @@ paths:
                 type: array
                 items:
                  $ref: '#/components/schemas/Author'
+ /visitors:
+    get:
+      tags:
+        - Visitor
+      summary: Get all visitors
+      operationId: getVisitors
+      responses:
+        200:
+          description: The list of visitors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Visitor'
 #TD2 2-a
  /books/{bookId}/authors/{authorId}:
     put:
@@ -364,6 +379,15 @@ components:
                         description: Contenu de la réponse 500
     #TD2 use heritage
   schemas:
+    Visitor:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        reference:
+          type: string
     Book:
       allOf:
         - $ref: '#/components/schemas/crupdateBook'
