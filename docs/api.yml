@@ -601,12 +601,6 @@ components:
           type: string
         reference:
           type: string
-    Book:
-      allOf:
-        - $ref: '#/components/schemas/crupdateBook'
-        - properties:
-            Author:
-              $ref: '#/components/schemas/Author'
     BorrowRequest:
       type: object
       properties:
@@ -625,7 +619,7 @@ components:
           format: date-time
     ActivityResponse:
       allOf:
-        - $ref: '#/components/schemas/Response'
+        - $ref: '#/components/schemas/ResponseStatus'
         - properties:
             body:
               type: object
@@ -650,26 +644,37 @@ components:
       enum:
         - M
         - F
-    Response:
-      type: object
-      properties:
-        status:
-          $ref: '#/components/schemas/Status'
-        body:
-          type: object
-    Status:
+    ResponseStatus:
       type: object
       properties:
         code:
           type: integer
+          example: 200
         message:
           type: string
-    BookResponse:
+          example: OK
+    ResponseBodyTemplate:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        body:
+          type: object
+    BookListBody:
       allOf:
-        - $ref: '#/components/schemas/Response'
+        - $ref: '#/components/schemas/ResponseBodyTemplate'
         - properties:
             body:
-              $ref: '#/components/schemas/Book'
+              type: array
+              items:
+                $ref: '#/components/schemas/Book'
+    Book:
+      type: object
+      properties:
+        author:
+          $ref: '#/components/schemas/Author'
+      allOf:
+        - $ref: '#/components/schemas/crupdateBook'
   #TD2 create crupdateBook
     crupdateBook : 
       type: object
