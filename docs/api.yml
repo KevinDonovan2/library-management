@@ -43,7 +43,13 @@ paths:
               schema:
                 type: array
                 items:
-                 $ref: '#/components/schemas/Book'
+                 $ref: '#/components/schemas/BookListBody'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
     put:
       tags:
         - Book
@@ -65,6 +71,12 @@ paths:
                 type: array
                 items:
                  $ref: '#/components/schemas/Book'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
  /authors:
     get:
       tags:
@@ -88,6 +100,12 @@ paths:
                 type: array
                 items:
                  $ref: '#/components/schemas/Author'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
     put:
       tags:
           - Author
@@ -109,6 +127,12 @@ paths:
                 type: array
                 items:
                  $ref: '#/components/schemas/Author'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
     delete:
       tags:
         - Author
@@ -132,6 +156,12 @@ paths:
                 type: array
                 items:
                  $ref: '#/components/schemas/Author'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
  /visitors:
     get:
       tags:
@@ -147,6 +177,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Visitor'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
 #TD2 2-a
  /books/{bookId}/authors/{authorId}:
     put:
@@ -170,6 +206,12 @@ paths:
       responses:
         200:
           description: The book author has been updated successfully
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
 #TD2 2-b 
  /books/authors:
     put:
@@ -192,6 +234,12 @@ paths:
       responses:
         200:
           description: The authors for the specified books have been updated successfully
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
  /authors/import:
     post:
       tags:
@@ -217,6 +265,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Author'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
       security:
       - admin: []
 
@@ -245,6 +299,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
  /books/{bookId}/:
     put:
       tags:
@@ -272,25 +332,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BookResponse'
+                $ref: '#/components/schemas/Book'
         400:
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+          $ref: '#/components/responses/400'
         403:
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+          $ref: '#/components/responses/403'
         500:
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+          $ref: '#/components/responses/500'
  /books/{bookId}/return:
     put:
       tags:
@@ -318,25 +366,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BookResponse'
+                $ref: '#/components/schemas/Book'
         400:
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+          $ref: '#/components/responses/400'
         403:
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+          $ref: '#/components/responses/403'
         500:
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+          $ref: '#/components/responses/500'
  /books/borrowed:
     get:
       tags:
@@ -350,25 +386,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BookResponse'
+                $ref: '#/components/schemas/BookListBody'
         400:
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+          $ref: '#/components/responses/400'
         403:
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+          $ref: '#/components/responses/403'
         500:
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+          $ref: '#/components/responses/500'
  /books/available:
     get:
       security:
@@ -380,29 +404,13 @@ paths:
       operationId: getAvailableBooks
       responses:
         200:
-          description: List of available books
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BookResponse'
+          $ref: '#/components/responses/BookList_200'
         400:
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+          $ref: '#/components/responses/400'
         403:
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+          $ref: '#/components/responses/403'
         500:
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+          $ref: '#/components/responses/500'
  /visitors/{visitorId}/activities:
     get:
       tags:
@@ -439,23 +447,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ActivityResponse'
         400:
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+          $ref: '#/components/responses/400'
         403:
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+          $ref: '#/components/responses/403'
         500:
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+          $ref: '#/components/responses/500'
 components:
   parameters:
     pathPagination:
@@ -486,111 +482,32 @@ components:
           pageSize:
             type: integer
             default: 50
-  responses:
-        baseResponse:
-          description: Réponse de base pour toutes les réponses
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: object
-                    properties:
-                      code:
-                        type: integer
-                        description: Code de statut
-                      message:
-                        type: string
-                        description: Message
-                  body:
-                    type: object
-                    description: Contenu de la réponse
-
-        successResponse:
-          description: Réponse 200 (Success)
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/responses/baseResponse'
-                  - type: object
-                    properties:
-                      status:
-                        properties:
-                          code:
-                            type: integer
-                            description: Code de statut
-                          message:
-                            type: string
-                            description: Message
-                      body:
-                        type: object
-                        description: Contenu de la réponse 200
-
-        badRequestResponse:
-          description: Réponse 400 (Bad Request)
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/responses/baseResponse'
-                  - type: object
-                    properties:
-                      status:
-                        properties:
-                          code:
-                            type: integer
-                            description: Code de statut
-                          message:
-                            type: string
-                            description: Message
-                      body:
-                        type: object
-                        description: Contenu de la réponse 400
-
-        forbiddenResponse:
-          description: Réponse 403 (Forbidden)
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/responses/baseResponse'
-                  - type: object
-                    properties:
-                      status:
-                        properties:
-                          code:
-                            type: integer
-                            description: Code de statut
-                          message:
-                            type: string
-                            description: Message
-                      body:
-                        type: object
-                        description: Contenu de la réponse 403
-
-        serverErrorResponse:
-          description: Réponse 500 (Server Error)
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/responses/baseResponse'
-                  - type: object
-                    properties:
-                      status:
-                        properties:
-                          code:
-                            type: integer
-                            description: Code de statut
-                          message:
-                            type: string
-                            description: Message
-                      body:
-                        type: object
-                        description: Contenu de la réponse 500
     #TD2 use heritage
+  responses:
+    BookList_200:
+      description: List of books
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BookListBody'
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestBody'
+    403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ForbiddenBody'
+    500:
+      description: ServerErrorResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ServerErrorResponse'
   schemas:
     Visitor:
       type: object
@@ -728,7 +645,6 @@ components:
           enum:
             - M
             - F
-
     ImportBook:
       type: object
       properties:
