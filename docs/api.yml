@@ -250,12 +250,7 @@ paths:
         content:
           application/json:
             schema:
-              oneOf:
-                - $ref: '#/components/schemas/ImportAuthor'
-          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
-            schema:
-              type: string
-              description: Fichier Excel (XLSX) pour l'importation d'auteurs
+              $ref: '#/components/schemas/ImportAuthor'
       responses:
         200:
           description: Liste des auteurs importés
@@ -284,12 +279,7 @@ paths:
         content:
           application/json:
             schema:
-              oneOf:
-                - $ref: '#/components/schemas/ImportBook'
-          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
-            schema:
-              type: string  
-              description: Fichier Excel (XLSX) pour l'importation de livres
+              $ref: '#/components/schemas/ImportBook'
       responses:
         200:
           description: Liste des livres importés
