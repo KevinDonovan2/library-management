@@ -635,17 +635,20 @@ components:
         releaseDate:
           type: string
           format: date
-    ImportAuthor:
+    ImportBook:
       type: object
       properties:
-        authorName:
+        data:
+          oneOf:
+            - $ref: '#/components/schemas/ImportBookExcel'
+            - $ref: '#/components/schemas/ImportBookJSON'
+    ImportBookExcel:
+      type: string
+      format: binary
+      properties:
+        file:
           type: string
-        sex:
-          type: string
-          enum:
-            - M
-            - F
-    ImportBook:
+    ImportBookJSON:
       type: object
       properties:
         bookName:
@@ -656,14 +659,29 @@ components:
           type: integer
         topic:
           type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
         releaseDate:
           type: string
-          format: date
         idAuthor:
+          type: string
+    ImportAuthor:
+      type: string
+      format: binary
+      properties:
+        data:
+          oneOf:
+            - $ref: '#/components/schemas/ImportAuthorExcel'
+            - $ref: '#/components/schemas/ImportAuthorJSON'
+    ImportAuthorExcel:
+      type: object
+      properties:
+        file:
+          type: string
+    ImportAuthorJSON:
+      type: object
+      properties:
+        authorName:
+          type: string
+        sex:
           type: string
   securitySchemes:
     public:
