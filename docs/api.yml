@@ -660,6 +660,30 @@ components:
           $ref: '#/components/schemas/ResponseStatus'
         body:
           type: object
+    BadRequestBody:
+      allOf:
+        - $ref: '#/components/schemas/ResponseBodyTemplate'
+      example:
+        status:
+          code: 400
+          message: BAD REQUEST
+        body: { }
+    ForbiddenBody:
+      allOf:
+        - $ref: '#/components/schemas/ResponseBodyTemplate'
+      example:
+        status:
+          code: 403
+          message: FORBIDDEN
+        body: { }
+    ServerErrorResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResponseBodyTemplate'
+      example:
+        status:
+          code: 500
+          message: ServerErrorResponse
+        body: { }
     BookListBody:
       allOf:
         - $ref: '#/components/schemas/ResponseBodyTemplate'
