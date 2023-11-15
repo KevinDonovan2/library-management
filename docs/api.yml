@@ -6,12 +6,14 @@ info:
 servers:
  - url: https://library.com
 security:
-  - oauth2: []
+  - oauth2: [ admin ]
 paths:
  /books:
     get:
       tags:
         - Book
+      security:
+        - oauth2: []
       summary: Get all books with pagination
       description: The returned books are ordered by updated datetime.
       operationId: getBooks
@@ -83,6 +85,8 @@ paths:
     get:
       tags:
         - Author
+      security:
+        - oauth2: [ admin ]
       summary: Get all authors with pagination
       operationId: getAuthors
       parameters:
@@ -214,7 +218,6 @@ paths:
           $ref: '#/components/responses/403'
         500:
           $ref: '#/components/responses/500'
-#TD2 2-b 
  /books/authors:
     put:
       tags:
@@ -474,7 +477,6 @@ components:
           pageSize:
             type: integer
             default: 50
-    #TD2 use heritage
   responses:
     BookList_200:
       description: List of books
@@ -608,7 +610,6 @@ components:
           $ref: '#/components/schemas/Author'
       allOf:
         - $ref: '#/components/schemas/crupdateBook'
-  #TD2 create crupdateBook
     crupdateBook : 
       type: object
       properties:
@@ -679,8 +680,8 @@ components:
     oauth2:
       type: oauth2
       flows:
-        password:
-          tokenUrl: https://library.token.com/
+        implicit:
+          authorizationUrl: https://library.token.com 
           scopes:
             anonyme: User not authentificated
             admin: User authentificated  as visitor
